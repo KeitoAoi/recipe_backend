@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,14 +86,11 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'recipe_db',
-        'USER': 'recipe_user',
-        'PASSWORD': 'abdul018',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    "default": dj_database_url.config(
+        default="postgresql://recipe_y8a9_user:EH2jkDFLkkoBvpy6todhWTyJUUHDaBi9@dpg-d0datbc9c44c73c9ucig-a/recipe_y8a9",   # falls back to .env
+        conn_max_age=600,                    # keeps connections open
+        ssl_require=True,                    # needed for Render
+    )
 }
 
 
